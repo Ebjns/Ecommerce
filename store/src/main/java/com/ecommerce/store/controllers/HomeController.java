@@ -1,5 +1,7 @@
-package com.ecommerce.store;
+package com.ecommerce.store.controllers;
 
+import com.ecommerce.store.repository.OrderRepository;
+import com.ecommerce.store.models.Order;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
@@ -14,17 +16,17 @@ public class HomeController {
     }
 
     @GetMapping
-    public List<Orders> getAll() {
+    public List<Order> getAll() {
         return repo.findAll();
     }
 
     @PostMapping
-    public Orders add(@RequestBody Orders order) {
+    public Order add(@RequestBody Order order) {
         return repo.save(order);
     }
 
     @PutMapping("/{id}")
-    public Orders update(@PathVariable Long id, @RequestBody Orders updatedOrder) {
+    public Order update(@PathVariable Long id, @RequestBody Order updatedOrder) {
         return repo.findById(id)
                 .map(o -> {
                     o.setItemName(updatedOrder.getItemName());
